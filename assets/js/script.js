@@ -21,7 +21,30 @@ console.log(UpperCaseLetters);
 console.log(symbols);
 console.log(numbers);
 
+
 function generatePassword() {
+    let password = "";
+    let passwordDictionary = "";
+
+    if (incUpperCase) {
+      passwordDictionary = UpperCaseLetters;
+    } 
+    if (incLowerCase) {
+      passwordDictionary.push(LowerCaseLetters);
+    }
+
+    if (incNumeric) {
+      passwordDictionary.push(numbers);
+    } 
+
+    if (incSpecialChar) {
+      passwordDictionary.push(symbols);
+    } 
+
+    for (let i=0;i<=userPasswordLength;i++) {
+        
+    }
+    return password;
 
 }
 
