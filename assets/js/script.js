@@ -13,41 +13,38 @@ let numbers = numeric.split("");
 let min_password_length = 8;
 let max_password_length = 128;
 let [incUpperCase, incLowerCase, incNumeric, incSpecialChar] = [true,true,true,true];
-let userPasswordLength = 0;
-
-
-console.log(LowerCaseLetters);
-console.log(UpperCaseLetters);
-console.log(symbols);
-console.log(numbers);
+let userPasswordLength = 8;
 
 
 function generatePassword() {
-    let password = "";
-    let passwordDictionary = "";
+    
+    let pswd=[];
+    let passwordDictionary = [];
 
     if (incUpperCase) {
       passwordDictionary = UpperCaseLetters;
     } 
     if (incLowerCase) {
-      passwordDictionary.push(LowerCaseLetters);
+      passwordDictionary = passwordDictionary.concat(LowerCaseLetters);
+      // console.log(passwordDictionary);
     }
 
     if (incNumeric) {
-      passwordDictionary.push(numbers);
+      passwordDictionary = passwordDictionary.concat(numbers);
+      // console.log(passwordDictionary);
     } 
 
     if (incSpecialChar) {
-      passwordDictionary.push(symbols);
+      passwordDictionary = passwordDictionary.concat(symbols);
+      // console.log(passwordDictionary);
     } 
-
-    for (let i=0;i<=userPasswordLength;i++) {
-        
+    
+    for (let i=0;i<userPasswordLength;i++) {
+      pswd += passwordDictionary[Math.floor(Math.random()*passwordDictionary.length)];
     }
-    return password;
-
+    
+    return pswd;
 }
-
 
 // Write password to the #password input
 function writePassword() {
