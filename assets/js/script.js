@@ -34,19 +34,29 @@ function getUserInput() {
             s= "Input Error: Password length must be at least 8 and no more than 128 characters. Please try again.";
             return s;
         } else {
+             
+             let repeat = true;
+             //repeat the criteria prompts until at least one character set is selected
+             while (repeat) {
               // prompt user for charcgter types to include in password 
               incUpperCase = confirm("Press Ok to include Upper Case letters, or Cancel to exclude?");
               incLowerCase = confirm("Press Ok to include Lower Case letters, or Cancel to exclude?");
               incNumeric = confirm("Press Ok to include numeric values, or Cancel to exclude?");
               incSpecialChar = confirm("Press Ok to include special characters, or Cancel to exclude?");
 
-              // if none of the charcter types are selected otherwise exit and return an Input Error msg
+              // if none of the charcter types are selected then let the user either exit or repeat the prompts
               if (!incLowerCase && !incUpperCase && !incNumeric && !incSpecialChar) {
-                  s= "Input Error: Password must include at least one class of alphanumeric characters and/or special characters. Please try again.";
-                  return s;
+                  let errorPrompt = confirm("Input Error: Password must include at least one class of alphanumeric characters and/or special characters. Please try again.");
+                  if (errorPrompt === false) {
+                    s = "Exit"
+                    return s;
+                  } else {
+                    repeat=true;
+                  }
               } else {
-                return s;
+                  repeat=false;
               }
+           }
     }
     return s;
   }
@@ -88,10 +98,11 @@ function writePassword() {
   let password = generatePassword(); // call the generate password function
   let passwordText = document.querySelector("#password");
   
-  // if getUserInput function returned a NULL then all inputs validated successfully otherwise output the returned error message
+  // if getUserInput function returned a NULL then all inputs validated successfully and print the generated password. Otherwise if the funciton returns Exit then do nothing, otherwise output the error message // 
   if (userInput===null) {
       passwordText.value = password; 
-  } else {
+  } else if (userInput==="Exit") {
+    } else {
       passwordText.value = userInput;
 } 
 
